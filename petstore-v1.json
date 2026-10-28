@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Petstore Demo",
+    "version": "1.0.0",
+    "description": "Baseline API contract for ContractWatch testing"
+  },
+  "paths": {
+    "/pets": {
+      "get": {
+        "summary": "List all pets",
+        "operationId": "listPets",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of pets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a pet",
+        "operationId": "createPet",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Null response"
+          }
+        }
+      }
+    },
+    "/pets/{id}": {
+      "get": {
+        "summary": "Info for a specific pet",
+        "operationId": "showPetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a pet",
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pet deleted"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "List orders",
+        "responses": {
+          "200": {
+            "description": "List of orders"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "CreatePetRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
+      "PetListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

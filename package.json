@@ -1,0 +1,31 @@
+{
+  "name": "@portfolio/contract-watch",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "API compatibility checker that detects breaking changes and generates consumer-oriented contract tests",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": {
+    "contract-watch": "dist/src/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "test": "tsc && node --test dist/*.test.js",
+    "test:ts": "tsc && node --test dist/tests/*.test.js",
+    "ui": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "openapi",
+    "breaking-changes",
+    "contract-testing",
+    "api-governance",
+    "ci-cd"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}
